@@ -1,3 +1,21 @@
+use std::{env, io::{stdout,stdin,Write}};
+
 fn main() {
-    println!("Hello, world!");
+    let args: Vec<String> = env::args().skip(1).collect();
+    let mut command = String::new();
+    for arg in args {
+        println!("{}", arg);
+    }
+    loop{
+        print!("rdb> ");
+        let _ = stdout().flush();
+        stdin().read_line(&mut command).expect("Error while trying to read from stdin");
+        if command.trim() == "exit" {
+            break;
+        }
+        else {
+            println!("Command not found");
+        }
+        command.clear();
+    }
 }
